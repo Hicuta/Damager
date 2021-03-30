@@ -47,6 +47,7 @@ object DamagerListeners {
                 it.drops.clear()
                 it.setShouldDropExperience(false)
                 it.deathMessage(null)
+                inDamager.remove(it.entity)
             }
         }
     }

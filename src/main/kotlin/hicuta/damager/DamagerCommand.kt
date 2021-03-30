@@ -20,7 +20,6 @@ object DamagerCommand : CommandExecutor {
                     DamagerHandler.damagers.forEach {
                         if (it.name.equals(args[1], ignoreCase = true)) DamagerHandler.damagers.remove(it)
                         it.id?.cancel()
-                        println(DamagerHandler.damagers)
                         DamagerHandler.restartDamagers()
                     }
                 } catch (e: Exception) {

@@ -40,9 +40,10 @@ object DamagerHandler {
 
     private fun startDamagers() {
         for (damager in damagers) {
-            damager.id = task(period = damager.ticks.toLong()) {
+            damager.id = task(sync = false,period = damager.ticks.toLong()) {
                 for (p in Bukkit.getOnlinePlayers()) {
                     if (damager.box.isInArea(p.location)) {
+                        p.noDamageTicks = 0
                         sync { p.damage(damager.damage) }
                     }
                 }
