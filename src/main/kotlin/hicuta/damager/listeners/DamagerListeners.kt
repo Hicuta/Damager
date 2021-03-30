@@ -65,7 +65,9 @@ object DamagerListeners {
 
     fun isInDamager(loc: Location): Boolean {
         DamagerHandler.damagers.forEach {
-            return it.box.isInArea(loc)
+            if(it.box.isInArea(loc)){
+                return true
+            }
         }
         return false
     }
