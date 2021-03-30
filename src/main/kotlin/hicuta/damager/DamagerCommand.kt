@@ -51,7 +51,6 @@ object DamagerCommand : CommandExecutor {
             DamagerHandler.damagers.add(damager)
             DamagerConfiguration.addDamager(damager)
             sender.sendMessage("Added Damager")
-            println(damager)
             DamagerHandler.restartDamagers()
         } else {
             sender.sendMessage("${ChatColor.AQUA}/Damager remove <Name>")
