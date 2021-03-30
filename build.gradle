@@ -1,0 +1,56 @@
+import org.apache.tools.ant.filters.ReplaceTokens
+
+plugins {
+    id 'java'
+    id 'org.jetbrains.kotlin.jvm' version '1.4.30'
+    id 'com.github.johnrengelman.shadow' version '6.1.0'
+    id 'org.jetbrains.kotlin.plugin.serialization' version '1.4.30'
+
+}
+
+group = 'hicuta'
+version = '1.0-SNAPSHOT'
+
+sourceCompatibility = '11'
+targetCompatibility = '11'
+apply plugin: 'kotlin' // or 'kotlin-multiplatform' for multiplatform projects
+apply plugin: 'kotlinx-serialization'
+repositories {
+    jcenter()
+    maven { url 'https://repo.codemc.io/repository/maven-snapshots/' }
+    mavenCentral()
+    maven {
+        name = 'papermc-repo'
+        url = 'https://papermc.io/repo/repository/maven-public/'
+    }
+    maven {
+        name = 'sonatype'
+        url = 'https://oss.sonatype.org/content/groups/public/'
+    }
+}
+
+dependencies {
+    implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0"
+    implementation("net.axay:kspigot:1.16.26")
+
+    compileOnly 'com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT'
+}
+
+processResources {
+    from(sourceSets.main.resources.srcDirs) {
+        filter ReplaceTokens, tokens: [version: version]
+    }
+}
+shadowJar {
+    relocate 'net.axay.kspigot', 'hicuta.shadow.net.axay.kspigot'
+}
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+}
+compileTestKotlin {
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+}

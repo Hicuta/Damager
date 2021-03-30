@@ -1,0 +1,9 @@
+name: Damager
+version: 1.0
+main: hicuta.damager.InternalMainClass
+api-version: 1.16
+authors: [ Hicuta ]
+description: Damager Plugin
+
+commands:
+  damager:
